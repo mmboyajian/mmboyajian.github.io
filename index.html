@@ -6,61 +6,77 @@
     <title>Timeline</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+    :root {
+        --bg-color: #f8f8f7;
+        --text-color: #1a1a1a;
+        --accent-color: #a0a0a0;
+        --gutter: 20px; /* Smaller gutter for mobile */
+    }
+
+    /* Base Styles (Mobile First) */
+    body {
+        background-color: var(--bg-color);
+        margin: 0;
+        padding: 40px var(--gutter); /* Tighten padding for small screens */
+        font-family: 'Inter', sans-serif;
+        color: var(--text-color);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .timeline {
+        display: grid;
+        grid-template-columns: 1fr; /* Single column by default */
+        gap: 60px; /* Vertical breathing room between entries */
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    .entry {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 0;
+    }
+
+    /* Desktop Enhancements (Wider than 768px) */
+    @media (min-width: 768px) {
         body {
-            background-color: #f4f4f2; /* Warm, expensive off-white */
-            margin: 0;
-            padding: 10vw 5vw; /* Fluid spacing based on screen width */
-            font-family: 'Inter', sans-serif;
-            color: #1a1a1a;
-            -webkit-font-smoothing: antialiased;
+            padding: 8vw 6vw; /* Restore massive gutters for desktop */
         }
-
-        /* The disciplined grid */
+        
         .timeline {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 80px 40px; /* Massive vertical space for luxury feel */
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: repeat(12, 1fr); /* Switch to 12-col grid */
+            gap: 120px 40px;
         }
 
-        .entry {
-            grid-column: span 12;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        /* Responsive Layout Logic */
+        .entry.main { grid-column: 2 / span 10; }
+        .entry.left { grid-column: 1 / span 5; }
+        .entry.right { grid-column: 7 / span 6; }
+        .entry.center { grid-column: 4 / span 6; }
+    }
 
-        /* Desktop Positioning: Asymmetrical & Sleek */
-        @media (min-width: 1024px) {
-            .entry.wide { grid-column: 2 / span 10; } /* Centered but narrow */
-            .entry.left { grid-column: 1 / span 6; }  /* Left half */
-            .entry.right { grid-column: 7 / span 6; } /* Right half */
-        }
+    /* Typography */
+    h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 400;
+        font-size: 1.8rem; /* Use 'rem' so it scales better */
+        margin: 0;
+    }
 
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-            /* Sharp edges - no rounded corners allowed for this look */
-            border-radius: 0; 
-        }
-
-        .meta {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em; /* Spaced out caps = high end */
-            font-weight: 600;
-            margin-bottom: -10px;
-        }
-
-        .text-content {
-            font-size: 15px;
-            line-height: 1.6;
-            max-width: 450px; /* Prevents text from stretching too far */
-            font-weight: 300;
-        }
-    </style>
+    .meta {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--accent-color);
+    }
+</style>
 </head>
 <body>
 
